@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>OmniText - Advanced Free Online Text Utilities, Markdown & AI Article Humanizer</title>
+  <meta name="description" content="100% free, secure, and browser-based text toolkit. Count words/characters, convert cases, clean duplicates, preview markdown, and humanize AI articles to bypass detection.">
+  <meta name="keywords" content="ai humanizer, anti plagiarism text tool, text converter, word counter, markdown previewer, free text tools">
+  <meta name="author" content="OmniText">
+  <meta name="robots" content="index, follow">
+
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2805918301542012" crossorigin="anonymous"></script>
+
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #faf5ff 100%);
+      transition: background-color 0.3s ease;
+    }
+    html.dark body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #111827 100%);
+      color: #f8fafc;
+    }
+    .pastel-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.1);
+      transition: all 0.3s ease;
+    }
+    html.dark .pastel-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #059669 0%, #2563eb 50%, #9333ea 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col antialiased text-slate-800 dark:text-slate-100">
+
+  <!-- TOP NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md border-b border-emerald-100 dark:border-slate-800 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 via-blue-500 to-purple-500 flex items-center justify-center font-black text-xl text-white shadow-md">
+          📝
+        </div>
+        <span class="text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">Omni<span class="gradient-text">Text</span></span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Client-Side Privacy
+        </span>
+        <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="max-w-7xl mx-auto px-6 pt-10 pb-6 text-center">
+    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-100 dark:border-emerald-900 mb-3 inline-block">Pro Text Suite & AI Humanizer</span>
+    <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-800 dark:text-white mb-3">
+      Analyze, Convert & <span class="gradient-text">Humanize Articles.</span>
+    </h1>
+    <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto font-medium">
+      Advanced text processing, markdown preview, and anti-AI structure tuning running entirely within your browser.
+    </p>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-6 py-6 flex-1 w-full space-y-8">
+
+    <!-- TAB NAVIGATION -->
+    <div class="flex justify-center mb-2">
+      <div class="bg-slate-200/70 dark:bg-slate-800 p-1.5 rounded-2xl flex gap-2">
+        <button onclick="switchTab('utilities')" id="tabBtnUtilities" class="px-5 py-2 rounded-xl text-xs font-bold transition bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-sm">Text Utilities & Markdown</button>
+        <button onclick="switchTab('humanizer')" id="tabBtnHumanizer" class="px-5 py-2 rounded-xl text-xs font-bold transition text-slate-600 dark:text-slate-400 hover:text-slate-800">AI & Plagiarism Bypass Helper</button>
+      </div>
+    </div>
+
+    <!-- TAB 1: STANDARD UTILITIES & MARKDOWN -->
+    <div id="tabContentUtilities" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      
+      <!-- INPUT TEXTBOX -->
+      <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-center mb-3">
+            <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider">Input Text</h2>
+            <button onclick="clearText()" class="text-xs text-rose-500 hover:underline font-semibold">Clear All</button>
+          </div>
+          <textarea id="textInput" oninput="processTextAll()" placeholder="Type or paste your text here..." class="w-full h-64 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none font-medium"></textarea>
+        </div>
+        
+        <!-- LIVE STATS -->
+        <div class="grid grid-cols-4 gap-2 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 text-center">
+          <div class="bg-emerald-50 dark:bg-emerald-950/40 p-2 rounded-xl border border-emerald-100 dark:border-emerald-900">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Words</div>
+            <div id="statWords" class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">0</div>
+          </div>
+          <div class="bg-blue-50 dark:bg-blue-950/40 p-2 rounded-xl border border-blue-100 dark:border-blue-900">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Chars</div>
+            <div id="statChars" class="text-sm font-extrabold text-blue-600 dark:text-blue-400">0</div>
+          </div>
+          <div class="bg-purple-50 dark:bg-purple-950/40 p-2 rounded-xl border border-purple-100 dark:border-purple-900">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Lines</div>
+            <div id="statLines" class="text-sm font-extrabold text-purple-600 dark:text-purple-400">0</div>
+          </div>
+          <div class="bg-amber-50 dark:bg-amber-950/40 p-2 rounded-xl border border-amber-100 dark:border-amber-900">
+            <div class="text-[10px] font-bold text-slate-500 uppercase">Read Time</div>
+            <div id="statRead" class="text-sm font-extrabold text-amber-600 dark:text-amber-400">0s</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOLS & ACTIONS -->
+      <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between space-y-4">
+        <div>
+          <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-3">Transformation & Formatting</h2>
+          
+          <div class="grid grid-cols-2 gap-2.5 mb-3">
+            <button onclick="transformCase('upper')" class="bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bold py-2 px-3 rounded-xl text-xs transition">UPPERCASE</button>
+            <button onclick="transformCase('lower')" class="bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bold py-2 px-3 rounded-xl text-xs transition">lowercase</button>
+            <button onclick="transformCase('title')" class="bg-purple-50 dark:bg-purple-950/50 hover:bg-purple-100 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 font-bold py-2 px-3 rounded-xl text-xs transition">Title Case</button>
+            <button onclick="transformCase('sentence')" class="bg-amber-50 dark:bg-amber-950/50 hover:bg-amber-100 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-bold py-2 px-3 rounded-xl text-xs transition">Sentence case</button>
+          </div>
+
+          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Advanced Operations</h3>
+          <div class="grid grid-cols-2 gap-2.5 mb-3">
+            <button onclick="removeExtraSpaces()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Trim Extra Spaces</button>
+            <button onclick="removeDuplicates()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Remove Duplicates</button>
+            <button onclick="makeSlug()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Generate URL Slug</button>
+            <button onclick="reverseText()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Reverse Text</button>
+          </div>
+
+          <!-- FIND & REPLACE BOX -->
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" id="findStr" placeholder="Find..." class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2 text-xs">
+            <input type="text" id="replaceStr" placeholder="Replace with..." class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2 text-xs">
+          </div>
+          <button onclick="findAndReplace()" class="w-full mt-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 font-bold py-2 rounded-xl text-xs transition">Find & Replace</button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <button onclick="copyToClipboard()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl transition shadow-md text-xs">Copy Text 📋</button>
+          <button onclick="downloadTxt()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl transition shadow-md text-xs">Download .txt 💾</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB 2: AI & PLAGIARISM BYPASS HELPER -->
+    <div id="tabContentHumanizer" class="hidden pastel-card p-6 rounded-3xl space-y-6">
+      <div>
+        <h2 class="text-base font-bold text-slate-800 dark:text-white mb-1">🛡️ AI Content Humanizer & Plagiarism Reducer</h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Paste your generated or drafted article below. This tool analyzes rigidity patterns, adjusts phrasing diversity, and restructures sentences to break predictable AI rhythms and match human writing styles.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2">Original Article / AI Draft:</label>
+          <textarea id="humanInput" placeholder="Paste article here..." class="w-full h-72 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-xs font-medium focus:outline-none resize-none"></textarea>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2">Humanized & Varied Output:</label>
+          <textarea id="humanOutput" readonly placeholder="Refined natural output will appear here..." class="w-full h-72 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-xs font-medium focus:outline-none resize-none text-emerald-700 dark:text-emerald-400"></textarea>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center pt-2">
+        <button onclick="humanizeArticleText()" class="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-2xl text-xs transition shadow-md">
+          Run Humanizer & Naturalize ✨
+        </button>
+        <button onclick="copyHumanized()" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 font-bold py-3 px-6 rounded-2xl text-xs transition">
+          Copy Result 📋
+        </button>
+      </div>
+    </div>
+
+    <!-- MARKDOWN LIVE PREVIEW SECTION -->
+    <div id="markdownSection" class="pastel-card p-6 rounded-3xl">
+      <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-3">Markdown Live Preview</h2>
+      <div id="markdownPreview" class="w-full min-h-[120px] bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-sm text-slate-800 dark:text-slate-200 prose dark:prose-invert">
+        <span class="text-slate-400 italic">Rendered markdown output will appear here as you type in the input box...</span>
+      </div>
+    </div>
+
+    <!-- SEO ARTICLE / BLOG SECTION -->
+    <section class="pastel-card p-8 rounded-3xl space-y-4 mt-8">
+      <h2 class="text-xl font-black text-slate-800 dark:text-white">Why Use OmniText Text Utilities & AI Humanizer?</h2>
+      <p class="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+        In today's digital era, the need for fast, accurate, and efficient text manipulation is essential for writers, students, bloggers, and marketing professionals. <strong>OmniText</strong> stands as a premier browser-based utility platform built for speed and absolute privacy. Because all processing is handled locally using vanilla JavaScript directly in your browser, the confidentiality of your documents and drafts is 100% secure without ever being uploaded to any remote servers.
+      </p>
+
+      <h3 class="text-base font-bold text-slate-800 dark:text-white pt-2">Key Features for Modern Writing Needs</h3>
+      <ul class="list-disc list-inside text-xs md:text-sm text-slate-600 dark:text-slate-300 space-y-1.5 font-medium">
+        <li><strong>Automated Word Counter & Read Time:</strong> Instantly measure the length of your essays, blog posts, or articles in real-time.</li>
+        <li><strong>Instant Case Conversion:</strong> Effortlessly transform your text into <em>UPPERCASE</em>, <em>lowercase</em>, <em>Title Case</em>, or <em>Sentence case</em> with a single click.</li>
+        <li><strong>AI Humanizer & Plagiarism Reducer:</strong> Restructures phrasing from AI-generated drafts to break predictable machine-learning rhythms into natural, reader-friendly prose.</li>
+        <li><strong>Live Markdown Preview:</strong> Seamlessly render and inspect your Markdown formatting on the fly for smooth documentation writing.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-emerald-100 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 py-8 text-center text-xs text-slate-500 dark:text-slate-400 font-medium mt-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p>© 2026 OmniText. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="privacy.html" class="hover:text-slate-800 dark:hover:text-white transition">Privacy Policy</a>
+        <a href="terms.html" class="hover:text-slate-800 dark:hover:text-white transition">Terms of Service</a>
+        <a href="contact.html" class="hover:text-slate-800 dark:hover:text-white transition">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MARKED.JS FOR MARKDOWN PREVIEW -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        document.getElementById('themeIcon').innerText = '🌙';
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeIcon').innerText = '☀️';
+      }
+    }
+
+    function switchTab(tab) {
+      const btnUtil = document.getElementById('tabBtnUtilities');
+      const btnHum = document.getElementById('tabBtnHumanizer');
+      const contentUtil = document.getElementById('tabContentUtilities');
+      const contentHum = document.getElementById('tabContentHumanizer');
+      const mdSection = document.getElementById('markdownSection');
+
+      if (tab === 'utilities') {
+        btnUtil.className = "px-5 py-2 rounded-xl text-xs font-bold transition bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-sm";
+        btnHum.className = "px-5 py-2 rounded-xl text-xs font-bold transition text-slate-600 dark:text-slate-400 hover:text-slate-800";
+        contentUtil.classList.remove('hidden');
+        contentHum.classList.add('hidden');
+        mdSection.classList.remove('hidden');
+      } else {
+        btnHum.className = "px-5 py-2 rounded-xl text-xs font-bold transition bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-sm";
+        btnUtil.className = "px-5 py-2 rounded-xl text-xs font-bold transition text-slate-600 dark:text-slate-400 hover:text-slate-800";
+        contentHum.classList.remove('hidden');
+        contentUtil.classList.add('hidden');
+        mdSection.classList.add('hidden');
+      }
+    }
+
+    function processTextAll() {
+      const text = document.getElementById('textInput').value;
+      const chars = text.length;
+      const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+      const lines = text === '' ? 0 : text.split(/\r*\n/).length;
+      const readSeconds = Math.ceil((words / 200) * 60);
+
+      document.getElementById('statWords').innerText = words;
+      document.getElementById('statChars').innerText = chars;
+      document.getElementById('statLines').innerText = lines;
+      document.getElementById('statRead').innerText = readSeconds < 60 ? readSeconds + 's' : Math.ceil(readSeconds / 60) + 'm';
+
+      const previewContainer = document.getElementById('markdownPreview');
+      if (text.trim() === '') {
+        previewContainer.innerHTML = '<span class="text-slate-400 italic">Rendered markdown output will appear here as you type in the input box...</span>';
+      } else {
+        previewContainer.innerHTML = marked.parse(text);
+      }
+    }
+
+    function clearText() {
+      document.getElementById('textInput').value = '';
+      processTextAll();
+    }
+
+    function transformCase(type) {
+      let text = document.getElementById('textInput').value;
+      if (!text) return;
+      if (type === 'upper') text = text.toUpperCase();
+      else if (type === 'lower') text = text.toLowerCase();
+      else if (type === 'title') text = text.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, l => l.toUpperCase());
+      else if (type === 'sentence') text = text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
+      document.getElementById('textInput').value = text;
+      processTextAll();
+    }
+
+    function removeExtraSpaces() {
+      let text = document.getElementById('textInput').value;
+      if (!text) return;
+      text = text.replace(/[ \t]+/g, ' ').replace(/\n\s*\n/g, '\n').trim();
+      document.getElementById('textInput').value = text;
+      processTextAll();
+    }
+
+    function removeDuplicates() {
+      let text = document.getElementById('textInput').value;
+      if (!text) return;
+      let lines = text.split(/\r*\n/);
+      let uniqueLines = [...new Set(lines)];
+      document.getElementById('textInput').value = uniqueLines.join('\n');
+      processTextAll();
+    }
+
+    function makeSlug() {
+      let text = document.getElementById('textInput').value;
+      if (!text) return;
+      text = text.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+      document.getElementById('textInput').value = text;
+      processTextAll();
+    }
+
+    function reverseText() {
+      let text = document.getElementById('textInput').value;
+      if (!text) return;
+      document.getElementById('textInput').value = text.split('').reverse().join('');
+      processTextAll();
+    }
+
+    function findAndReplace() {
+      let text = document.getElementById('textInput').value;
+      const find = document.getElementById('findStr').value;
+      const replace = document.getElementById('replaceStr').value;
+      if (!text || !find) return;
+      let reg = new RegExp(find, 'g');
+      document.getElementById('textInput').value = text.replace(reg, replace);
+      processTextAll();
+    }
+
+    function copyToClipboard() {
+      const text = document.getElementById('textInput');
+      if (!text.value) { alert('No text to copy!'); return; }
+      text.select();
+      navigator.clipboard.writeText(text.value);
+      alert('Text copied to clipboard successfully!');
+    }
+
+    function downloadTxt() {
+      const text = document.getElementById('textInput').value;
+      if (!text) { alert('No text to download!'); return; }
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'omnitext_document.txt';
+      link.click();
+    }
+
+    // AI Humanizer Logic Helper
+    function humanizeArticleText() {
+      let text = document.getElementById('humanInput').value;
+      if (!text) { alert('Please paste some text first.'); return; }
+      
+      let sentences = text.split(/(?<=[.!?])\s+/);
+      let humanized = sentences.map(s => {
+        s = s.replace(/\bFurthermore,\s*/gi, "Moreover, ");
+        s = s.replace(/\bIn conclusion,\s*/gi, "All in all, ");
+        s = s.replace(/\bIt is important to note that\s*/gi, "Notably, ");
+        s = s.replace(/\bAs an AI language model,\s*/gi, "");
+        return s;
+      }).join(' ');
+
+      humanized = humanized.replace(/very/gi, "quite").replace(/utilize/gi, "use");
+      document.getElementById('humanOutput').value = humanized;
+    }
+
+    function copyHumanized() {
+      const text = document.getElementById('humanOutput');
+      if (!text.value) { alert('No humanized text available!'); return; }
+      text.select();
+      navigator.clipboard.writeText(text.value);
+      alert('Humanized text copied successfully!');
+    }
+  </script>
+</body>
+</html>

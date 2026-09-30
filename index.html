@@ -111,35 +111,52 @@
 
   <!-- MAIN APP VIEW (HOME) -->
   <div id="homeView">
-    <!-- HERO SECTION WITH DYNAMIC SVG ILLUSTRATION -->
+    <!-- HERO SECTION WITH UNIQUE OMNITEXT SVG ILLUSTRATION -->
     <div class="hero-glow top-24 left-1/2 -translate-x-1/2"></div>
     <section class="max-w-7xl mx-auto px-6 pt-10 pb-6 text-center relative z-10">
       <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-100 dark:border-emerald-900 mb-3 inline-block">Pro Text Suite & AI Humanizer</span>
       
-      <!-- DYNAMIC SVG HERO ILLUSTRATION -->
-      <div class="max-w-md mx-auto my-6 animate-float">
-        <svg viewBox="0 0 500 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-2xl">
+      <!-- UNIQUE OMNITEXT HERO SVG ILLUSTRATION (REPLACED GENERIC IMAGE) -->
+      <div class="max-w-lg mx-auto my-6 animate-float">
+        <svg viewBox="0 0 520 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-2xl">
           <defs>
-            <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#059669" />
               <stop offset="50%" stop-color="#2563eb" />
               <stop offset="100%" stop-color="#9333ea" />
             </linearGradient>
           </defs>
-          <rect x="40" y="20" width="420" height="180" rx="30" fill="url(#mainGrad)" fill-opacity="0.06" stroke="url(#mainGrad)" stroke-width="2" stroke-dasharray="8 6" />
-          <rect x="70" y="50" width="160" height="120" rx="16" fill="#ffffff" class="dark:fill-slate-800" stroke="#cbd5e1" stroke-width="1.5" />
-          <circle cx="105" cy="85" r="14" fill="#10b981" fill-opacity="0.3" />
-          <path d="M 85 145 L 120 110 L 150 130 L 185 95 L 210 145 Z" fill="#3b82f6" fill-opacity="0.35" />
-          <path d="M 245 110 L 275 110" stroke="url(#mainGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 6" />
-          <polygon points="275,103 290,110 275,117" fill="#2563eb" />
-          <rect x="300" y="50" width="130" height="120" rx="16" fill="#ffffff" class="dark:fill-slate-800" stroke="#10b981" stroke-width="2" />
-          <text x="365" y="85" text-anchor="middle" fill="#059669" font-size="12" font-weight="extrabold">✨ Humanized</text>
-          <text x="365" y="115" text-anchor="middle" fill="#64748b" font-size="10" font-weight="bold">100% Natural Flow</text>
-          <rect x="325" y="130" width="80" height="20" rx="6" fill="#10b981" />
-          <text x="365" y="144" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="bold">BYPASS AI</text>
-          <g transform="translate(170, 20)">
-            <rect width="160" height="32" rx="12" fill="#ffffff" class="dark:fill-slate-800" stroke="#9333ea" stroke-width="1.5" />
-            <text x="80" y="21" text-anchor="middle" fill="#9333ea" font-size="11" font-weight="bold">🛡️ Markdown & NLP Suite</text>
+          <!-- Outer Dashboard Frame -->
+          <rect x="30" y="20" width="460" height="180" rx="28" fill="url(#textGrad)" fill-opacity="0.05" stroke="url(#textGrad)" stroke-width="2" stroke-dasharray="8 6" />
+          
+          <!-- Left Box: Raw AI Text Document Mockup -->
+          <rect x="60" y="45" width="150" height="130" rx="14" fill="#ffffff" class="dark:fill-slate-800" stroke="#cbd5e1" stroke-width="1.5" />
+          <rect x="80" y="65" width="90" height="10" rx="4" fill="#cbd5e1" fill-opacity="0.6" />
+          <rect x="80" y="85" width="110" height="8" rx="3" fill="#cbd5e1" fill-opacity="0.4" />
+          <rect x="80" y="100" width="100" height="8" rx="3" fill="#cbd5e1" fill-opacity="0.4" />
+          <rect x="80" y="115" width="70" height="8" rx="3" fill="#cbd5e1" fill-opacity="0.4" />
+          <circle cx="175" cy="145" r="14" fill="#f43f5e" fill-opacity="0.2" />
+          <text x="175" y="149" text-anchor="middle" fill="#f43f5e" font-size="10" font-weight="bold">AI</text>
+
+          <!-- Middle Processing Arrow / Gears -->
+          <path d="M 230 110 L 270 110" stroke="url(#textGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 6" />
+          <polygon points="270,102 290,110 270,118" fill="#2563eb" />
+          <circle cx="250" cy="80" r="16" fill="#2563eb" fill-opacity="0.15" />
+          <text x="250" y="84" text-anchor="middle" fill="#2563eb" font-size="12">⚙️</text>
+
+          <!-- Right Box: Humanized & Polished Output -->
+          <rect x="310" y="45" width="150" height="130" rx="14" fill="#ffffff" class="dark:fill-slate-800" stroke="#10b981" stroke-width="2" />
+          <rect x="330" y="65" width="90" height="10" rx="4" fill="#10b981" fill-opacity="0.8" />
+          <rect x="330" y="85" width="105" height="8" rx="3" fill="#10b981" fill-opacity="0.3" />
+          <rect x="330" y="100" width="95" height="8" rx="3" fill="#10b981" fill-opacity="0.3" />
+          <rect x="330" y="115" width="80" height="8" rx="3" fill="#10b981" fill-opacity="0.3" />
+          <rect x="330" y="138" width="85" height="20" rx="6" fill="#10b981" />
+          <text x="372" y="152" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="bold">✨ 100% NATURAL</text>
+
+          <!-- Floating Header Badge -->
+          <g transform="translate(160, 15)">
+            <rect width="200" height="32" rx="12" fill="#ffffff" class="dark:fill-slate-800" stroke="#059669" stroke-width="1.5" />
+            <text x="100" y="21" text-anchor="middle" fill="#059669" font-size="11" font-weight="bold">🛡️ Smart NLP & Markdown Suite</text>
           </g>
         </svg>
       </div>
@@ -269,29 +286,32 @@
         </div>
       </div>
 
-      <!-- KNOWLEDGE HUB: CLICKABLE EXPERT EDITORIAL PANELS -->
+      <!-- KNOWLEDGE HUB: CLICKABLE EXPERT EDITORIAL PANELS (WITH AFFILIATE LINK) -->
       <section id="editorial-panels" class="pt-8">
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-8">
           <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-200">Knowledge Hub</span>
-          <h2 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Expert Writing & SEO Guides</h2>
+          <h2 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Expert Writing & Automation Guides</h2>
           <p class="text-sm text-slate-500">Klik pada salah satu panel di bawah ini untuk membuka halaman artikel mendalam secara penuh (*full-screen view*).</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
           <!-- Panel 1 -->
-          <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between space-y-4 hover:scale-[1.02] transition cursor-pointer border border-emerald-500/20" onclick="openFullArticle('Mastering SEO Copywriting & Readability Scores', 'Masterclass #1', `
+          <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between space-y-4 hover:scale-[1.02] transition cursor-pointer border border-emerald-500/20" onclick="openFullArticle('Mastering SEO Copywriting & Workflow Automation', 'Masterclass #1', `
             <div class='mb-6 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 p-6 rounded-3xl border border-emerald-500/25 text-center'>
               <span class='text-5xl'>📈</span>
-              <p class='text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-3'>SEO & Readability Optimization</p>
+              <p class='text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-3'>SEO & Workflow Optimization</p>
             </div>
-            <h3>Why Readability Dictates Search Rankings</h3>
-            <p>In digital marketing, search engines like Google prioritize content that delivers clear value with optimal readability. Long walls of dense text discourage readers, increasing bounce rates and reducing dwell time.</p>
-            <p>By leveraging word counters, sentence case transformers, and proper keyword distribution, writers can structure content that ranks higher while retaining audience engagement.</p>
+            <h3>Mengapa Otomasi Alur Kerja Penulisan Sangat Penting?</h3>
+            <p>Di era digital yang serba cepat saat ini, efisiensi adalah kunci utama kesuksesan. Baik Anda seorang pengembang perangkat lunak, pembuat konten, maupun pemasar digital, mengelola berbagai tugas repetitif secara manual tidak hanya membuang-buang waktu tetapi juga menurunkan produktivitas.</p>
+            <p>Banyak profesional kini beralih ke perangkat otomatisasi berbasis awan (*cloud-based automation*) untuk merampingkan alur kerja mereka. Dengan mengintegrasikan sistem yang tepat, tugas-tugas administratif yang membosankan dapat diselesaikan dalam hitungan detik.</p>
+            <h3>Solusi: Memanfaatkan Platform Ekosistem Pintar</h3>
+            <p>Untuk mengatasi masalah tersebut, penggunaan perangkat bantu yang handal sangat diperlukan. Salah satu platform yang direkomendasikan untuk membantu mengoptimalkan produktivitas dan manajemen tugas digital adalah <a href='https://outlierkit.com/ref/8FNGN6' target='_blank' class='text-emerald-600 font-bold underline'>OutlierKit</a>.</p>
+            <p>Platform ini dirancang khusus untuk membantu para profesional menyederhanakan alur kerja tanpa memerlukan keahlian coding yang rumit. Dengan fitur integrasi tingkat lanjut, Anda dapat menghubungkan berbagai aplikasi favorit Anda dengan mudah dan efisien.</p>
             <ul>
-              <li><strong>Optimal Paragraph Length:</strong> Keep paragraphs under 4-5 sentences for mobile readability.</li>
-              <li><strong>Keyword Density:</strong> Natural integration of primary and secondary keywords avoids algorithmic penalties.</li>
-              <li><strong>Clear Formatting:</strong> Use headings (Markdown H1, H2, H3) to organize topics logically.</li>
+              <li><strong>Otomasi Instan:</strong> Menghubungkan berbagai aplikasi tanpa proses coding manual.</li>
+              <li><strong>Efisiensi Waktu:</strong> Mengurangi beban tugas repetitif harian hingga 70%.</li>
+              <li><strong>Skalabilitas Tinggi:</strong> Mendukung pertumbuhan proyek digital Anda secara optimal.</li>
             </ul>
           `)">
             <div>
@@ -299,8 +319,8 @@
                 <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-50 dark:bg-emerald-950 text-emerald-600 border border-emerald-200">Masterclass #1</span>
                 <span class="text-xs text-slate-400 font-semibold">1,200 Words</span>
               </div>
-              <h3 class="text-lg font-black text-slate-800 dark:text-white mb-2">Mastering SEO Copywriting</h3>
-              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3">Pelajari cara menulis artikel yang ramah SEO dan mudah dibaca untuk meningkatkan peringkat pencarian.</p>
+              <h3 class="text-lg font-black text-slate-800 dark:text-white mb-2">Mastering SEO & Workflow Automation</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3">Pelajari cara mengoptimalkan alur kerja digital dan otomatisasi tugas repetitif untuk produktivitas maksimal.</p>
             </div>
             <div class="pt-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between">
               <span class="text-xs font-extrabold text-emerald-600 hover:underline">Read Full Article →</span>
@@ -317,6 +337,7 @@
             <h3>How AI Detectors Evaluate Text Structure</h3>
             <p>Artificial intelligence models generate text based on statistical token probabilities. This creates predictable patterns known as low 'perplexity' and 'burstiness'—meaning sentence lengths and vocabulary choices remain too uniform.</p>
             <p>AI detectors analyze these mathematical signatures. To make AI drafts sound authentically human, you must vary sentence structures, introduce idiomatic phrasing, and break mechanical cadence.</p>
+            <p>Untuk mendukung pengelolaan strategi konten dan pemasaran digital Anda secara otomatis, pastikan untuk memanfaatkan perangkat modern seperti <a href='https://outlierkit.com/ref/8FNGN6' target='_blank' class='text-blue-600 font-bold underline'>OutlierKit</a> guna memaksimalkan efisiensi operasional.</p>
             <ul>
               <li><strong>Perplexity:</strong> Measures how surprising or complex word choices are within a sentence.</li>
               <li><strong>Burstiness:</strong> Evaluates the variation of sentence lengths and structural complexity across paragraphs.</li>
@@ -346,6 +367,7 @@
             <h3>Why Browser-Based Text Tools Are Safer</h3>
             <p>When handling confidential drafts, legal notes, or personal writing projects, uploading text to cloud-based editors exposes your data to third-party storage risks and potential privacy breaches.</p>
             <p>OmniText executes all calculations, case conversions, and Markdown previews entirely inside your browser sandbox via JavaScript. Your text never leaves your device.</p>
+            <p>Ingin mengeksplorasi lebih banyak perangkat digital dan automasi pintar? Kunjungi <a href='https://outlierkit.com/ref/8FNGN6' target='_blank' class='text-purple-600 font-bold underline'>OutlierKit</a> untuk solusi manajemen alur kerja terbaik.</p>
             <ul>
               <li><strong>Absolute Confidentiality:</strong> Zero server logging or cloud database storage.</li>
               <li><strong>Instant Execution:</strong> No network latency or server queue delays.</li>

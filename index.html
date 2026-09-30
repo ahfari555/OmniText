@@ -65,6 +65,24 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    .hero-glow {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(5,150,105,0.18) 0%, rgba(37,99,235,0.08) 60%, transparent 100%);
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 50%;
+    }
+    .article-body h3 { font-size: 1.5rem; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem; color: #059669; }
+    html.dark .article-body h3 { color: #34d399; }
+    .article-body p { font-size: 1.05rem; line-height: 2; color: #475569; margin-bottom: 1.25rem; }
+    html.dark .article-body p { color: #cbd5e1; }
+    .article-body ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; color: #475569; }
+    html.dark .article-body ul { color: #cbd5e1; }
+    .article-body li { margin-bottom: 0.5rem; font-size: 1rem; }
+    @keyframes float-slow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+    .animate-float { animation: float-slow 4s ease-in-out infinite; }
   </style>
 </head>
 <body class="font-sans min-h-screen flex flex-col antialiased text-slate-800 dark:text-slate-100">
@@ -80,6 +98,7 @@
       </a>
 
       <div class="flex items-center gap-3">
+        <a href="#editorial-panels" class="hidden md:inline-flex text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline">📚 Expert Guides</a>
         <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Client-Side Privacy
         </span>
@@ -90,151 +109,287 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="max-w-7xl mx-auto px-6 pt-10 pb-6 text-center">
-    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-100 dark:border-emerald-900 mb-3 inline-block">Pro Text Suite & AI Humanizer</span>
-    <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-800 dark:text-white mb-3">
-      Analyze, Convert & <span class="gradient-text">Humanize Articles.</span>
-    </h1>
-    <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto font-medium">
-      Advanced text processing, markdown preview, and anti-AI structure tuning running entirely within your browser.
-    </p>
-  </section>
-
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-6 py-6 flex-1 w-full space-y-8">
-
-    <!-- TAB NAVIGATION -->
-    <div class="flex justify-center mb-2">
-      <div class="bg-slate-200/70 dark:bg-slate-800 p-1.5 rounded-2xl flex gap-2">
-        <button onclick="switchTab('utilities')" id="tabBtnUtilities" class="px-5 py-2 rounded-xl text-xs font-bold transition bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-sm">Text Utilities & Markdown</button>
-        <button onclick="switchTab('humanizer')" id="tabBtnHumanizer" class="px-5 py-2 rounded-xl text-xs font-bold transition text-slate-600 dark:text-slate-400 hover:text-slate-800">AI & Plagiarism Bypass Helper</button>
-      </div>
-    </div>
-
-    <!-- TAB 1: STANDARD UTILITIES & MARKDOWN -->
-    <div id="tabContentUtilities" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <!-- MAIN APP VIEW (HOME) -->
+  <div id="homeView">
+    <!-- HERO SECTION WITH DYNAMIC SVG ILLUSTRATION -->
+    <div class="hero-glow top-24 left-1/2 -translate-x-1/2"></div>
+    <section class="max-w-7xl mx-auto px-6 pt-10 pb-6 text-center relative z-10">
+      <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-100 dark:border-emerald-900 mb-3 inline-block">Pro Text Suite & AI Humanizer</span>
       
-      <!-- INPUT TEXTBOX -->
-      <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider">Input Text</h2>
-            <button onclick="clearText()" class="text-xs text-rose-500 hover:underline font-semibold">Clear All</button>
-          </div>
-          <textarea id="textInput" oninput="processTextAll()" placeholder="Type or paste your text here..." class="w-full h-64 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none font-medium"></textarea>
-        </div>
-        
-        <!-- LIVE STATS -->
-        <div class="grid grid-cols-4 gap-2 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 text-center">
-          <div class="bg-emerald-50 dark:bg-emerald-950/40 p-2 rounded-xl border border-emerald-100 dark:border-emerald-900">
-            <div class="text-[10px] font-bold text-slate-500 uppercase">Words</div>
-            <div id="statWords" class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">0</div>
-          </div>
-          <div class="bg-blue-50 dark:bg-blue-950/40 p-2 rounded-xl border border-blue-100 dark:border-blue-900">
-            <div class="text-[10px] font-bold text-slate-500 uppercase">Chars</div>
-            <div id="statChars" class="text-sm font-extrabold text-blue-600 dark:text-blue-400">0</div>
-          </div>
-          <div class="bg-purple-50 dark:bg-purple-950/40 p-2 rounded-xl border border-purple-100 dark:border-purple-900">
-            <div class="text-[10px] font-bold text-slate-500 uppercase">Lines</div>
-            <div id="statLines" class="text-sm font-extrabold text-purple-600 dark:text-purple-400">0</div>
-          </div>
-          <div class="bg-amber-50 dark:bg-amber-950/40 p-2 rounded-xl border border-amber-100 dark:border-amber-900">
-            <div class="text-[10px] font-bold text-slate-500 uppercase">Read Time</div>
-            <div id="statRead" class="text-sm font-extrabold text-amber-600 dark:text-amber-400">0s</div>
-          </div>
-        </div>
+      <!-- DYNAMIC SVG HERO ILLUSTRATION -->
+      <div class="max-w-md mx-auto my-6 animate-float">
+        <svg viewBox="0 0 500 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-2xl">
+          <defs>
+            <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#059669" />
+              <stop offset="50%" stop-color="#2563eb" />
+              <stop offset="100%" stop-color="#9333ea" />
+            </linearGradient>
+          </defs>
+          <rect x="40" y="20" width="420" height="180" rx="30" fill="url(#mainGrad)" fill-opacity="0.06" stroke="url(#mainGrad)" stroke-width="2" stroke-dasharray="8 6" />
+          <rect x="70" y="50" width="160" height="120" rx="16" fill="#ffffff" class="dark:fill-slate-800" stroke="#cbd5e1" stroke-width="1.5" />
+          <circle cx="105" cy="85" r="14" fill="#10b981" fill-opacity="0.3" />
+          <path d="M 85 145 L 120 110 L 150 130 L 185 95 L 210 145 Z" fill="#3b82f6" fill-opacity="0.35" />
+          <path d="M 245 110 L 275 110" stroke="url(#mainGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 6" />
+          <polygon points="275,103 290,110 275,117" fill="#2563eb" />
+          <rect x="300" y="50" width="130" height="120" rx="16" fill="#ffffff" class="dark:fill-slate-800" stroke="#10b981" stroke-width="2" />
+          <text x="365" y="85" text-anchor="middle" fill="#059669" font-size="12" font-weight="extrabold">✨ Humanized</text>
+          <text x="365" y="115" text-anchor="middle" fill="#64748b" font-size="10" font-weight="bold">100% Natural Flow</text>
+          <rect x="325" y="130" width="80" height="20" rx="6" fill="#10b981" />
+          <text x="365" y="144" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="bold">BYPASS AI</text>
+          <g transform="translate(170, 20)">
+            <rect width="160" height="32" rx="12" fill="#ffffff" class="dark:fill-slate-800" stroke="#9333ea" stroke-width="1.5" />
+            <text x="80" y="21" text-anchor="middle" fill="#9333ea" font-size="11" font-weight="bold">🛡️ Markdown & NLP Suite</text>
+          </g>
+        </svg>
       </div>
 
-      <!-- TOOLS & ACTIONS -->
-      <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between space-y-4">
-        <div>
-          <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-3">Transformation & Formatting</h2>
-          
-          <div class="grid grid-cols-2 gap-2.5 mb-3">
-            <button onclick="transformCase('upper')" class="bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bold py-2 px-3 rounded-xl text-xs transition">UPPERCASE</button>
-            <button onclick="transformCase('lower')" class="bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bold py-2 px-3 rounded-xl text-xs transition">lowercase</button>
-            <button onclick="transformCase('title')" class="bg-purple-50 dark:bg-purple-950/50 hover:bg-purple-100 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 font-bold py-2 px-3 rounded-xl text-xs transition">Title Case</button>
-            <button onclick="transformCase('sentence')" class="bg-amber-50 dark:bg-amber-950/50 hover:bg-amber-100 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-bold py-2 px-3 rounded-xl text-xs transition">Sentence case</button>
-          </div>
-
-          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Advanced Operations</h3>
-          <div class="grid grid-cols-2 gap-2.5 mb-3">
-            <button onclick="removeExtraSpaces()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Trim Extra Spaces</button>
-            <button onclick="removeDuplicates()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Remove Duplicates</button>
-            <button onclick="makeSlug()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Generate URL Slug</button>
-            <button onclick="reverseText()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Reverse Text</button>
-          </div>
-
-          <!-- FIND & REPLACE BOX -->
-          <div class="grid grid-cols-2 gap-2">
-            <input type="text" id="findStr" placeholder="Find..." class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2 text-xs">
-            <input type="text" id="replaceStr" placeholder="Replace with..." class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2 text-xs">
-          </div>
-          <button onclick="findAndReplace()" class="w-full mt-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 font-bold py-2 rounded-xl text-xs transition">Find & Replace</button>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2 mt-4">
-          <button onclick="copyToClipboard()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl transition shadow-md text-xs">Copy Text 📋</button>
-          <button onclick="downloadTxt()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl transition shadow-md text-xs">Download .txt 💾</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- TAB 2: AI & PLAGIARISM BYPASS HELPER -->
-    <div id="tabContentHumanizer" class="hidden pastel-card p-6 rounded-3xl space-y-6">
-      <div>
-        <h2 class="text-base font-bold text-slate-800 dark:text-white mb-1">🛡️ AI Content Humanizer & Plagiarism Reducer</h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400">Paste your generated or drafted article below. This tool analyzes rigidity patterns, adjusts phrasing diversity, and restructures sentences to break predictable AI rhythms and match human writing styles.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div>
-          <label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2">Original Article / AI Draft:</label>
-          <textarea id="humanInput" placeholder="Paste article here..." class="w-full h-72 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-xs font-medium focus:outline-none resize-none"></textarea>
-        </div>
-        <div>
-          <label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2">Humanized & Varied Output:</label>
-          <textarea id="humanOutput" readonly placeholder="Refined natural output will appear here..." class="w-full h-72 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-xs font-medium focus:outline-none resize-none text-emerald-700 dark:text-emerald-400"></textarea>
-        </div>
-      </div>
-
-      <div class="flex justify-between items-center pt-2">
-        <button onclick="humanizeArticleText()" class="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-2xl text-xs transition shadow-md">
-          Run Humanizer & Naturalize ✨
-        </button>
-        <button onclick="copyHumanized()" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 font-bold py-3 px-6 rounded-2xl text-xs transition">
-          Copy Result 📋
-        </button>
-      </div>
-    </div>
-
-    <!-- MARKDOWN LIVE PREVIEW SECTION -->
-    <div id="markdownSection" class="pastel-card p-6 rounded-3xl">
-      <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-3">Markdown Live Preview</h2>
-      <div id="markdownPreview" class="w-full min-h-[120px] bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-sm text-slate-800 dark:text-slate-200 prose dark:prose-invert">
-        <span class="text-slate-400 italic">Rendered markdown output will appear here as you type in the input box...</span>
-      </div>
-    </div>
-
-    <!-- SEO ARTICLE / BLOG SECTION -->
-    <section class="pastel-card p-8 rounded-3xl space-y-4 mt-8">
-      <h2 class="text-xl font-black text-slate-800 dark:text-white">Why Use OmniText Text Utilities & AI Humanizer?</h2>
-      <p class="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-        In today's digital era, the need for fast, accurate, and efficient text manipulation is essential for writers, students, bloggers, and marketing professionals. <strong>OmniText</strong> stands as a premier browser-based utility platform built for speed and absolute privacy. Because all processing is handled locally using vanilla JavaScript directly in your browser, the confidentiality of your documents and drafts is 100% secure without ever being uploaded to any remote servers.
+      <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-800 dark:text-white mb-3">
+        Analyze, Convert & <span class="gradient-text">Humanize Articles.</span>
+      </h1>
+      <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto font-medium">
+        Advanced text processing, markdown preview, and anti-AI structure tuning running entirely within your browser.
       </p>
-
-      <h3 class="text-base font-bold text-slate-800 dark:text-white pt-2">Key Features for Modern Writing Needs</h3>
-      <ul class="list-disc list-inside text-xs md:text-sm text-slate-600 dark:text-slate-300 space-y-1.5 font-medium">
-        <li><strong>Automated Word Counter & Read Time:</strong> Instantly measure the length of your essays, blog posts, or articles in real-time.</li>
-        <li><strong>Instant Case Conversion:</strong> Effortlessly transform your text into <em>UPPERCASE</em>, <em>lowercase</em>, <em>Title Case</em>, or <em>Sentence case</em> with a single click.</li>
-        <li><strong>AI Humanizer & Plagiarism Reducer:</strong> Restructures phrasing from AI-generated drafts to break predictable machine-learning rhythms into natural, reader-friendly prose.</li>
-        <li><strong>Live Markdown Preview:</strong> Seamlessly render and inspect your Markdown formatting on the fly for smooth documentation writing.</li>
-      </ul>
     </section>
 
-  </main>
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-6 py-6 flex-1 w-full space-y-8">
+
+      <!-- TAB NAVIGATION -->
+      <div class="flex justify-center mb-2">
+        <div class="bg-slate-200/70 dark:bg-slate-800 p-1.5 rounded-2xl flex gap-2">
+          <button onclick="switchTab('utilities')" id="tabBtnUtilities" class="px-5 py-2 rounded-xl text-xs font-bold transition bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-sm">Text Utilities & Markdown</button>
+          <button onclick="switchTab('humanizer')" id="tabBtnHumanizer" class="px-5 py-2 rounded-xl text-xs font-bold transition text-slate-600 dark:text-slate-400 hover:text-slate-800">AI & Plagiarism Bypass Helper</button>
+        </div>
+      </div>
+
+      <!-- TAB 1: STANDARD UTILITIES & MARKDOWN -->
+      <div id="tabContentUtilities" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- INPUT TEXTBOX -->
+        <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider">Input Text</h2>
+              <button onclick="clearText()" class="text-xs text-rose-500 hover:underline font-semibold">Clear All</button>
+            </div>
+            <textarea id="textInput" oninput="processTextAll()" placeholder="Type or paste your text here..." class="w-full h-64 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none font-medium"></textarea>
+          </div>
+          
+          <!-- LIVE STATS -->
+          <div class="grid grid-cols-4 gap-2 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/60 text-center">
+            <div class="bg-emerald-50 dark:bg-emerald-950/40 p-2 rounded-xl border border-emerald-100 dark:border-emerald-900">
+              <div class="text-[10px] font-bold text-slate-500 uppercase">Words</div>
+              <div id="statWords" class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">0</div>
+            </div>
+            <div class="bg-blue-50 dark:bg-blue-950/40 p-2 rounded-xl border border-blue-100 dark:border-blue-900">
+              <div class="text-[10px] font-bold text-slate-500 uppercase">Chars</div>
+              <div id="statChars" class="text-sm font-extrabold text-blue-600 dark:text-blue-400">0</div>
+            </div>
+            <div class="bg-purple-50 dark:bg-purple-950/40 p-2 rounded-xl border border-purple-100 dark:border-purple-900">
+              <div class="text-[10px] font-bold text-slate-500 uppercase">Lines</div>
+              <div id="statLines" class="text-sm font-extrabold text-purple-600 dark:text-purple-400">0</div>
+            </div>
+            <div class="bg-amber-50 dark:bg-amber-950/40 p-2 rounded-xl border border-amber-100 dark:border-amber-900">
+              <div class="text-[10px] font-bold text-slate-500 uppercase">Read Time</div>
+              <div id="statRead" class="text-sm font-extrabold text-amber-600 dark:text-amber-400">0s</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOOLS & ACTIONS -->
+        <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between space-y-4">
+          <div>
+            <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-3">Transformation & Formatting</h2>
+            
+            <div class="grid grid-cols-2 gap-2.5 mb-3">
+              <button onclick="transformCase('upper')" class="bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bold py-2 px-3 rounded-xl text-xs transition">UPPERCASE</button>
+              <button onclick="transformCase('lower')" class="bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bold py-2 px-3 rounded-xl text-xs transition">lowercase</button>
+              <button onclick="transformCase('title')" class="bg-purple-50 dark:bg-purple-950/50 hover:bg-purple-100 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 font-bold py-2 px-3 rounded-xl text-xs transition">Title Case</button>
+              <button onclick="transformCase('sentence')" class="bg-amber-50 dark:bg-amber-950/50 hover:bg-amber-100 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-bold py-2 px-3 rounded-xl text-xs transition">Sentence case</button>
+            </div>
+
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Advanced Operations</h3>
+            <div class="grid grid-cols-2 gap-2.5 mb-3">
+              <button onclick="removeExtraSpaces()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Trim Extra Spaces</button>
+              <button onclick="removeDuplicates()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Remove Duplicates</button>
+              <button onclick="makeSlug()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Generate URL Slug</button>
+              <button onclick="reverseText()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-bold py-2 px-3 rounded-xl text-xs transition border border-slate-200 dark:border-slate-700">Reverse Text</button>
+            </div>
+
+            <!-- FIND & REPLACE BOX -->
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" id="findStr" placeholder="Find..." class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2 text-xs">
+              <input type="text" id="replaceStr" placeholder="Replace with..." class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2 text-xs">
+            </div>
+            <button onclick="findAndReplace()" class="w-full mt-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 font-bold py-2 rounded-xl text-xs transition">Find & Replace</button>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <button onclick="copyToClipboard()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl transition shadow-md text-xs">Copy Text 📋</button>
+            <button onclick="downloadTxt()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl transition shadow-md text-xs">Download .txt 💾</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: AI & PLAGIARISM BYPASS HELPER -->
+      <div id="tabContentHumanizer" class="hidden pastel-card p-6 rounded-3xl space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-slate-800 dark:text-white mb-1">🛡️ AI Content Humanizer & Plagiarism Reducer</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Paste your generated or drafted article below. This tool analyzes rigidity patterns, adjusts phrasing diversity, and restructures sentences to break predictable AI rhythms and match human writing styles.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2">Original Article / AI Draft:</label>
+            <textarea id="humanInput" placeholder="Paste article here..." class="w-full h-72 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-xs font-medium focus:outline-none resize-none"></textarea>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2">Humanized & Varied Output:</label>
+            <textarea id="humanOutput" readonly placeholder="Refined natural output will appear here..." class="w-full h-72 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-xs font-medium focus:outline-none resize-none text-emerald-700 dark:text-emerald-400"></textarea>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="humanizeArticleText()" class="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-2xl text-xs transition shadow-md">
+            Run Humanizer & Naturalize ✨
+          </button>
+          <button onclick="copyHumanized()" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 font-bold py-3 px-6 rounded-2xl text-xs transition">
+            Copy Result 📋
+          </button>
+        </div>
+      </div>
+
+      <!-- MARKDOWN LIVE PREVIEW SECTION -->
+      <div id="markdownSection" class="pastel-card p-6 rounded-3xl">
+        <h2 class="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-3">Markdown Live Preview</h2>
+        <div id="markdownPreview" class="w-full min-h-[120px] bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-sm text-slate-800 dark:text-slate-200 prose dark:prose-invert">
+          <span class="text-slate-400 italic">Rendered markdown output will appear here as you type in the input box...</span>
+        </div>
+      </div>
+
+      <!-- KNOWLEDGE HUB: CLICKABLE EXPERT EDITORIAL PANELS -->
+      <section id="editorial-panels" class="pt-8">
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-8">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-200">Knowledge Hub</span>
+          <h2 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Expert Writing & SEO Guides</h2>
+          <p class="text-sm text-slate-500">Klik pada salah satu panel di bawah ini untuk membuka halaman artikel mendalam secara penuh (*full-screen view*).</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Panel 1 -->
+          <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between space-y-4 hover:scale-[1.02] transition cursor-pointer border border-emerald-500/20" onclick="openFullArticle('Mastering SEO Copywriting & Readability Scores', 'Masterclass #1', `
+            <div class='mb-6 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 p-6 rounded-3xl border border-emerald-500/25 text-center'>
+              <span class='text-5xl'>📈</span>
+              <p class='text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-3'>SEO & Readability Optimization</p>
+            </div>
+            <h3>Why Readability Dictates Search Rankings</h3>
+            <p>In digital marketing, search engines like Google prioritize content that delivers clear value with optimal readability. Long walls of dense text discourage readers, increasing bounce rates and reducing dwell time.</p>
+            <p>By leveraging word counters, sentence case transformers, and proper keyword distribution, writers can structure content that ranks higher while retaining audience engagement.</p>
+            <ul>
+              <li><strong>Optimal Paragraph Length:</strong> Keep paragraphs under 4-5 sentences for mobile readability.</li>
+              <li><strong>Keyword Density:</strong> Natural integration of primary and secondary keywords avoids algorithmic penalties.</li>
+              <li><strong>Clear Formatting:</strong> Use headings (Markdown H1, H2, H3) to organize topics logically.</li>
+            </ul>
+          `)">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-50 dark:bg-emerald-950 text-emerald-600 border border-emerald-200">Masterclass #1</span>
+                <span class="text-xs text-slate-400 font-semibold">1,200 Words</span>
+              </div>
+              <h3 class="text-lg font-black text-slate-800 dark:text-white mb-2">Mastering SEO Copywriting</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3">Pelajari cara menulis artikel yang ramah SEO dan mudah dibaca untuk meningkatkan peringkat pencarian.</p>
+            </div>
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between">
+              <span class="text-xs font-extrabold text-emerald-600 hover:underline">Read Full Article →</span>
+              <span class="text-xs font-bold bg-emerald-600 text-white px-3 py-1.5 rounded-lg shadow-md">Open Full View</span>
+            </div>
+          </div>
+
+          <!-- Panel 2 -->
+          <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between space-y-4 hover:scale-[1.02] transition cursor-pointer border border-blue-500/20" onclick="openFullArticle('The Mechanics of AI Content Detectors & Anti-Plagiarism', 'Masterclass #2', `
+            <div class='mb-6 bg-gradient-to-r from-blue-500/15 to-purple-500/15 p-6 rounded-3xl border border-blue-500/25 text-center'>
+              <span class='text-5xl'>🤖</span>
+              <p class='text-sm font-bold text-blue-600 dark:text-blue-400 mt-3'>AI Patterns & Burstiness</p>
+            </div>
+            <h3>How AI Detectors Evaluate Text Structure</h3>
+            <p>Artificial intelligence models generate text based on statistical token probabilities. This creates predictable patterns known as low 'perplexity' and 'burstiness'—meaning sentence lengths and vocabulary choices remain too uniform.</p>
+            <p>AI detectors analyze these mathematical signatures. To make AI drafts sound authentically human, you must vary sentence structures, introduce idiomatic phrasing, and break mechanical cadence.</p>
+            <ul>
+              <li><strong>Perplexity:</strong> Measures how surprising or complex word choices are within a sentence.</li>
+              <li><strong>Burstiness:</strong> Evaluates the variation of sentence lengths and structural complexity across paragraphs.</li>
+              <li><strong>Humanizing:</strong> Restructuring repetitive transitions to match natural human voice.</li>
+            </ul>
+          `)">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-blue-50 dark:bg-blue-950 text-blue-600 border border-blue-200">Masterclass #2</span>
+                <span class="text-xs text-slate-400 font-semibold">1,050 Words</span>
+              </div>
+              <h3 class="text-lg font-black text-slate-800 dark:text-white mb-2">AI Detectors & Anti-Plagiarism</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3">Pahami cara kerja detektor AI dan bagaimana cara membuat teks buatan mesin menjadi lebih natural.</p>
+            </div>
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between">
+              <span class="text-xs font-extrabold text-blue-600 hover:underline">Read Full Article →</span>
+              <span class="text-xs font-bold bg-blue-600 text-white px-3 py-1.5 rounded-lg shadow-md">Open Full View</span>
+            </div>
+          </div>
+
+          <!-- Panel 3 -->
+          <div class="pastel-card p-6 rounded-3xl flex flex-col justify-between space-y-4 hover:scale-[1.02] transition cursor-pointer border border-purple-500/20" onclick="openFullArticle('Client-Side Processing & Document Privacy', 'Masterclass #3', `
+            <div class='mb-6 bg-gradient-to-r from-purple-500/15 to-pink-500/15 p-6 rounded-3xl border border-purple-500/25 text-center'>
+              <span class='text-5xl'>🔒</span>
+              <p class='text-sm font-bold text-purple-600 dark:text-purple-400 mt-3'>Zero Server Upload Security</p>
+            </div>
+            <h3>Why Browser-Based Text Tools Are Safer</h3>
+            <p>When handling confidential drafts, legal notes, or personal writing projects, uploading text to cloud-based editors exposes your data to third-party storage risks and potential privacy breaches.</p>
+            <p>OmniText executes all calculations, case conversions, and Markdown previews entirely inside your browser sandbox via JavaScript. Your text never leaves your device.</p>
+            <ul>
+              <li><strong>Absolute Confidentiality:</strong> Zero server logging or cloud database storage.</li>
+              <li><strong>Instant Execution:</strong> No network latency or server queue delays.</li>
+              <li><strong>Complete Control:</strong> Work offline anywhere without internet dependency.</li>
+            </ul>
+          `)">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-purple-50 dark:bg-purple-950 text-purple-600 border border-purple-200">Masterclass #3</span>
+                <span class="text-xs text-slate-400 font-semibold">900 Words</span>
+              </div>
+              <h3 class="text-lg font-black text-slate-800 dark:text-white mb-2">Client-Side Processing & Privacy</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3">Ketahui keunggulan pemrosesan lokal berbasis browser untuk menjaga kerahasiaan dokumen Anda.</p>
+            </div>
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between">
+              <span class="text-xs font-extrabold text-purple-600 hover:underline">Read Full Article →</span>
+              <span class="text-xs font-bold bg-purple-600 text-white px-3 py-1.5 rounded-lg shadow-md">Open Full View</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- FULL PAGE ARTICLE VIEW (HIDDEN BY DEFAULT) -->
+  <div id="articleFullView" class="hidden max-w-4xl mx-auto px-6 py-12 flex-1 w-full space-y-8">
+    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-6">
+      <button onclick="closeFullArticle()" class="inline-flex items-center gap-2 text-xs font-extrabold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 px-5 py-2.5 rounded-2xl border border-emerald-200 dark:border-emerald-800 shadow-sm transition hover:scale-105">
+        ← Kembali ke Beranda
+      </button>
+      <span id="fullArticleBadge" class="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-600 text-white">Badge</span>
+    </div>
+    <div class="space-y-4">
+      <h1 id="fullArticleTitle" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white leading-tight">Title</h1>
+      <div class="text-xs text-slate-400 font-semibold pb-4 border-b border-slate-200 dark:border-slate-800">Published by OmniText Editorial Team • 2026 Edition</div>
+    </div>
+    <div id="fullArticleBody" class="article-body space-y-6 text-slate-700 dark:text-slate-300"></div>
+    <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <button onclick="window.print()" class="text-xs font-bold text-emerald-600 hover:underline">🖨 Cetak Artikel Ini</button>
+      <button onclick="closeFullArticle()" class="bg-emerald-600 text-white font-extrabold text-xs px-6 py-3 rounded-xl shadow-lg">Kembali ke Alat Utama</button>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer class="border-t border-emerald-100 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 py-8 text-center text-xs text-slate-500 dark:text-slate-400 font-medium mt-12">
@@ -263,6 +418,23 @@
         document.documentElement.classList.add('dark');
         document.getElementById('themeIcon').innerText = '☀️';
       }
+    }
+
+    // Full Page Article View Control Functions
+    function openFullArticle(title, badge, content) {
+      document.getElementById('fullArticleTitle').innerText = title;
+      document.getElementById('fullArticleBadge').innerText = badge;
+      document.getElementById('fullArticleBody').innerHTML = content;
+      
+      document.getElementById('homeView').classList.add('hidden');
+      document.getElementById('articleFullView').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeFullArticle() {
+      document.getElementById('articleFullView').classList.add('hidden');
+      document.getElementById('homeView').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function switchTab(tab) {

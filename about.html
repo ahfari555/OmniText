@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About | OmniText</title><meta name="description" content="Learn about OmniText and its browser-based writing and text productivity tools.">
+<meta name="robots" content="index,follow"><link rel="canonical" href="https://omnitext-online.vercel.app/about.html">
+<style>
+:root{--ink:#18352f;--muted:#58716b;--accent:#087f65;--line:#e1ebe7;--paper:#fff;--bg:#f5f8f7}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--accent)}.top{background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:920px;margin:auto;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{font-weight:800;text-decoration:none;color:var(--ink);font-size:20px}
+main{max-width:920px;margin:42px auto;padding:0 22px 52px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,4vw,42px)}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(30px,5vw,44px);line-height:1.15;letter-spacing:-.04em;margin:10px 0 12px}h2{font-size:21px;line-height:1.3;margin:30px 0 8px}p,li{color:var(--muted)}.updated{font-size:13px;color:var(--muted);margin:0 0 24px}.callout{padding:16px 18px;border-left:4px solid var(--accent);background:#eff8f4;border-radius:8px;margin:20px 0}.contact-card{padding:20px;border:1px solid var(--line);border-radius:14px;background:#f9fcfb}footer{border-top:1px solid var(--line);background:#fff;text-align:center;padding:24px 16px;font-size:13px;color:var(--muted)}footer a{margin:0 7px;text-decoration:none}
+</style></head><body>
+<header class="top"><nav class="nav"><a class="brand" href="/">OmniText</a><a href="/#tools">Back to text workspace</a></nav></header>
+<main><article class="panel">
+<div class="eyebrow">About OmniText</div><h1>A practical workspace for everyday text</h1>
+<p>OmniText is a browser-based writing and text productivity toolkit. It brings together text analysis, text formatting, lightweight writing review, and a Markdown workspace in one place.</p>
+<div class="callout"><strong>Our purpose</strong><p>Help people inspect, organize, transform, and prepare text more efficiently with accessible tools and practical guidance.</p></div>
+<h2>What you can do with OmniText</h2>
+<ul>
+<li><strong>Analyze text:</strong> review word, character, line, paragraph, and estimated reading-time counts.</li>
+<li><strong>Format text:</strong> apply common case conversions, clean whitespace, remove duplicate lines, sort lines, and use other basic transformations.</li>
+<li><strong>Review writing:</strong> receive simple rule-based observations, such as long-sentence and repeated-word signals. These observations are prompts for editing, not a full grammar or fact-checking service.</li>
+<li><strong>Work with Markdown:</strong> write Markdown, preview formatted output, copy the source, and download a Markdown file.</li>
+<li><strong>Learn:</strong> read practical guides about text metrics, formatting, and Markdown.</li>
+</ul>
+<h2>How the tools work</h2>
+<p>Text entered into the core text utilities and writing review is processed by scripts running in your browser. The Markdown preview uses third-party JavaScript libraries loaded by the page. Like most websites, loading OmniText may also involve requests to hosting, font, content-delivery, analytics, or advertising providers where enabled. See our <a href="/privacy.html">Privacy Policy</a> for details.</p>
+<h2>Our approach</h2>
+<p>We aim to make the tools understandable and useful. Automated counts and writing observations can have limitations, especially with different languages, symbols, formatting, and writing styles. Please review important output before using it in professional, academic, or other consequential settings.</p>
+<h2>Questions or feedback?</h2>
+<p>We welcome feedback about the tools and guides. Visit our <a href="/contact.html">Contact page</a> to reach us.</p>
+</article></main>
+<footer>© <span id="year"></span> OmniText · <a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/guides/">Guides</a></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script></body></html>

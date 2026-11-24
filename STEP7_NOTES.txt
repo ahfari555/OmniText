@@ -1,0 +1,33 @@
+STEP 7 — OMNITEXT POLICY PAGES
+
+Included revised:
+- about.html
+- contact.html
+- privacy.html
+- terms.html
+
+Preserved from the uploaded files:
+- ads.txt (publisher line preserved exactly)
+- google45274bc7d9133ca5.html (verification content preserved)
+
+Important review notes:
+- The uploaded About page was not provided, so this package includes a newly drafted About page.
+- Contact email preserved: bizmathlab@gmail.com
+- Response time preserved as an aim of 24–48 business hours, not a guarantee.
+- Privacy language avoids claiming that no data whatsoever leaves the device. Core text processing is described as browser-side, while acknowledging external resources, hosting, and advertising providers.
+- Check the privacy and advertising disclosures against the actual providers and consent requirements applicable to your audience before publishing.
+- This is a content/technical draft, not legal advice or a guarantee of AdSense approval.
+
+INSTALL:
+1. Back up current project.
+2. Copy the four HTML pages into project root, replacing existing copies.
+3. Keep ads.txt at the site root.
+4. Keep Google verification HTML at the exact root filename.
+5. Do not alter your current homepage or guides in this step.
+6. Test:
+   /about.html
+   /contact.html
+   /privacy.html
+   /terms.html
+   /ads.txt
+   /google45274bc7d9133ca5.html

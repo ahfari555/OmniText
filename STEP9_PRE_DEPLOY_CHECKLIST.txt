@@ -1,0 +1,27 @@
+PRE-DEPLOY CHECKLIST — DO NOT PUSH UNTIL COMPLETE
+
+LOCAL TESTS
+[ ] Open homepage in Live Server
+[ ] Word count, character count, characters without spaces
+[ ] Line count, paragraph count, reading time
+[ ] All formatter and cleanup buttons
+[ ] Find and replace
+[ ] Writing Assistant review and clear
+[ ] Markdown preview, copy, insert helpers, download
+[ ] Check mobile layout around 390px width
+[ ] Check desktop layout around 1366px width
+[ ] Check keyboard focus and navigation
+[ ] Open every guide article and policy page
+[ ] Verify email link opens the expected mail client
+
+DEPLOYMENT
+[ ] Commit and push once after all local tests pass
+[ ] Wait for Vercel deployment to complete
+[ ] Check /ads.txt and Google verification URL on production domain
+[ ] Open every URL listed in sitemap.xml; confirm HTTP 200
+[ ] Submit sitemap in Google Search Console
+[ ] Request indexing for homepage, guide index and three guides
+[ ] Confirm AdSense Auto ads are disabled during content review
+[ ] Revisit AdSense only after the live pages and ad placements have been checked
+
+Do not treat this checklist as completed until each item has been tested.
